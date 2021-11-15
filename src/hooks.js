@@ -20,17 +20,11 @@ const useFlip = () => {
 */
 const useAxios = (url) => {
     const [state, setState] = useState([]);
-    
 
-    //error: name is not undefined when adding a playing card, it is an object.
-
-    const addElement = async (name = undefined) => {
-        const APIurl = name ? `${url}${name}/` : url; 
+    //name is auto set to be undefined if it's not passed in
+    const addElement = async (name) => {
         
-        //error: name is not undefined when adding a playing card, it is an object.
-        console.log(name)
-
-        //name adds more on to the url endpoint if needed
+        const APIurl = name ? `${url}${name}/` : url; 
         
         const response = await axios.get(APIurl);
         setState(elements => [...elements, { ...response.data, id: uuid() }]);
